@@ -80,8 +80,10 @@ class Post(db.Model):
     
     @validates('title')
     def validates_title(self, key, title):
-        words = ["Won't Believe", "Secret", "Top", "Guess"]
-        if not any(word in title for word in words):
+        #if title does not contain any words in the list of click bait words, raise error
+        #google: python check to see if list of words are in string
+        required_words = ["Won't Believe", "Secret", "Top", "Guess"]
+        if not any(word in title for word in required_words):
             raise ValueError("Make title more clickbait-y")
         return title
 
